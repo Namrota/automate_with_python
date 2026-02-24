@@ -147,5 +147,6 @@ if tables:
     for i, table in enumerate(tables):
         print(f"\n--- Table {i+1} ---")
         print(table)
+    table.to_csv(f'table_{i+1}.csv', index=False)  # Save each table as a CSV file
 else:
     print("No tables found.")
