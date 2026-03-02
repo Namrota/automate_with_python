@@ -44,4 +44,4 @@ def get_data_from_api(base_url:str, api_key:str, country:str=None, domains:str=N
     content= r.json()
     return content 
 
-print(get_data_from_api("https://newsapi.org/v2/everything", "news_api", q= "stockmarket", sortBy= "relevancy"))
+print(get_data_from_api("https://newsapi.org/v2/everything", "news_api", q= "cryptocurrency", sortBy= "relevancy"))
