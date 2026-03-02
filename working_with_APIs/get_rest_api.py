@@ -25,6 +25,7 @@ import requests
 from dotenv import load_dotenv
 load_dotenv() # Load environment variables from local .env file
 import os
+import pandas as pd
 
 def get_data_from_api(base_url:str, api_key:str, country:str=None, domains:str=None, q:str="None", language:str="en", 
                       sortBy:str="publishedAt"):
@@ -43,11 +44,18 @@ def get_data_from_api(base_url:str, api_key:str, country:str=None, domains:str=N
     r= requests.get(url)
     content= r.json()
     articles= content['articles']
+    #results=[]
+    results_list = []
     for article in articles:
-        print(f"Title: {article['title']}")
-        print(f"Description: {article['description']}")
-        print(f"URL: {article['url']}")
-        print("-"*40)
-    return None
+        #extend results list with a dictionary containing title, description, and url of each article
+        results_list.append(
+            {
+                "title": article['title'],
+                "description": article['description'],
+                "url": article['url']
+            }
+        )
+    results_df = pd.DataFrame(results_list, columns=["title", "description", "url"])
+    return results_df
 
 print(get_data_from_api("https://newsapi.org/v2/everything", "news_api", q= "cryptocurrency", sortBy= "relevancy"))
