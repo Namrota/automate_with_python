@@ -17,9 +17,9 @@ def geocode_locator(api_key:str, address:str, limit:int=5):
     result.append({"lat": content[0]['lat'], "lon": content[0]['lon']})
     return result
 
-def get_weather_forecast(api_key:str, lat:float, lon:float):
+def get_weather_forecast(api_key:str, lat:float, lon:float, units:str="metric"):
     api_key= os.environ[api_key]
-    url= f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={api_key}"
+    url= f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={api_key}&units={units}"
     r= requests.get(url)
     content= r.json()
     return content
@@ -27,7 +27,7 @@ def get_weather_forecast(api_key:str, lat:float, lon:float):
 lat= (geocode_locator("weather_api", "Karlsruhe,DE"))[0]['lat']
 lon= (geocode_locator("weather_api", "Karlsruhe,DE"))[0]['lon']
 
-weather_forecast= get_weather_forecast("weather_api", lat, lon)
+weather_forecast= get_weather_forecast("weather_api", lat, lon, "metric")
 results_list = []
 for forecast in weather_forecast['list']:
     results_list.append({
