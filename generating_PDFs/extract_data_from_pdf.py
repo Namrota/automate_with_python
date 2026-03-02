@@ -141,7 +141,7 @@ def read_pdf_table(pdf_path, page_number=1):
 # Example usage:
 pdf_path = r'generating_PDFs\weather.pdf'
 tables = read_pdf_table(pdf_path, page_number=1)
-
+print(type(tables))
 if tables:
     print("Extracted tables:")
     for i, table in enumerate(tables):
