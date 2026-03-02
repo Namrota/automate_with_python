@@ -42,6 +42,12 @@ def get_data_from_api(base_url:str, api_key:str, country:str=None, domains:str=N
         url += f"&sortBy={sortBy}"
     r= requests.get(url)
     content= r.json()
-    return content 
+    articles= content['articles']
+    for article in articles:
+        print(f"Title: {article['title']}")
+        print(f"Description: {article['description']}")
+        print(f"URL: {article['url']}")
+        print("-"*40)
+    return None
 
 print(get_data_from_api("https://newsapi.org/v2/everything", "news_api", q= "cryptocurrency", sortBy= "relevancy"))
